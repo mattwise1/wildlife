@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - WildUganda Tours</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .heading { font-family: 'Playfair Display', serif; }
+        .nav-link:after {
+            content: ''; position: absolute; width: 0; height: 3px; bottom: -4px; left: 0;
+            background: #166534; transition: width 0.4s ease;
+        }
+        .nav-link:hover:after { width: 100%; }
+        .modal { animation: modalPop 0.4s ease; }
+        @keyframes modalPop { 
+            from { opacity: 0; transform: scale(0.85); } 
+            to { opacity: 1; transform: scale(1); } 
+        }
+    </style>
+</head>
+<body class="bg-stone-50">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-14 h-14 bg-emerald-800 rounded-3xl flex items-center justify-center text-4xl">🦒</div>
+                <div class="text-3xl font-bold heading tracking-tight">
+                    <span class="text-emerald-800">Wild</span><span class="text-amber-600">Uganda</span>
+                </div>
+            </div>
+            <div class="flex gap-10 text-lg font-medium">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="bookings.html" class="nav-link">Bookings</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="contact.html" class="nav-link text-emerald-800">Contact</a>
+            </div>
+            <button onclick="showCartModal()" class="relative text-3xl hover:text-emerald-700 transition">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-count" class="absolute -top-2 -right-2 bg-rose-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="max-w-2xl mx-auto px-6 py-24">
+        <h1 class="heading text-6xl font-bold text-center mb-6">Get In Touch</h1>
+        <p class="text-center text-stone-600 mb-12">We usually reply within 24 hours</p>
+
+        <form onsubmit="handleSubmit(event)" class="space-y-8">
+            <div class="grid md:grid-cols-2 gap-6">
+                <input type="text" placeholder="First Name" required 
+                       class="w-full px-6 py-5 rounded-3xl border border-stone-300 focus:border-emerald-600 outline-none">
+                <input type="text" placeholder="Last Name" required 
+                       class="w-full px-6 py-5 rounded-3xl border border-stone-300 focus:border-emerald-600 outline-none">
+            </div>
+            
+            <input type="email" placeholder="Email Address" required 
+                   class="w-full px-6 py-5 rounded-3xl border border-stone-300 focus:border-emerald-600 outline-none">
+            
+            <input type="tel" placeholder="Phone Number (Optional)" 
+                   class="w-full px-6 py-5 rounded-3xl border border-stone-300 focus:border-emerald-600 outline-none">
+            
+            <textarea placeholder="Tell us about your travel plans, preferred dates, group size, or any special requests..." 
+                      rows="8" required
+                      class="w-full px-6 py-5 rounded-3xl border border-stone-300 focus:border-emerald-600 outline-none resize-y"></textarea>
+            
+            <button type="submit" 
+                    class="w-full bg-emerald-800 hover:bg-emerald-900 text-white py-6 rounded-3xl text-xl font-semibold transition-all">
+                Send Message
+            </button>
+        </form>
+    </div>
+
+    <!-- ==================== CART MODAL ==================== -->
+    <div id="cart-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
+        <div class="modal bg-white rounded-3xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-hidden shadow-2xl">
+            <div class="p-8 border-b flex justify-between items-center">
+                <h2 class="text-3xl font-bold">Your Safari Cart</h2>
+                <button onclick="hideCartModal()" class="text-4xl leading-none text-stone-400 hover:text-stone-600">×</button>
+            </div>
+            
+            <div id="cart-items" class="p-8 max-h-[55vh] overflow-auto"></div>
+            
+            <div class="p-8 border-t bg-stone-50">
+                <div class="flex justify-between items-center text-2xl font-bold mb-8">
+                    <span>Total</span>
+                    <span id="cart-total">$0</span>
+                </div>
+                <button onclick="proceedToPayment()" 
+                        class="w-full bg-emerald-800 hover:bg-emerald-900 text-white py-6 rounded-3xl text-lg font-semibold mb-4">
+                    Proceed to Secure Payment
+                </button>
+                <button onclick="hideCartModal()" 
+                        class="w-full border border-stone-300 py-6 rounded-3xl font-medium">
+                    Continue Shopping
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-emerald-950 text-white py-16">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 bg-white rounded-3xl flex items-center justify-center text-emerald-800 text-4xl">🦒</div>
+                    <span class="text-3xl font-bold heading">WildUganda</span>
+                </div>
+                <p class="text-emerald-200">Responsible Wildlife Tourism Since 2015</p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-lg mb-6">Contact Info</h4>
+                <a href="tel:+256700123456" class="block hover:text-amber-300 py-1">📞 +256 700 123 456</a>
+                <a href="mailto:info@wilduganda.ug" class="block hover:text-amber-300 py-1">✉️ info@wilduganda.ug</a>
+                <a href="mailto:bookings@wilduganda.ug" class="block hover:text-amber-300 py-1">✉️ bookings@wilduganda.ug</a>
+            </div>
+            <div>
+                <h4 class="font-semibold text-lg mb-6">Office</h4>
+                <p class="text-emerald-200">Plot 45, Kampala Road<br>Kampala, Uganda</p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-lg mb-6">Business Hours</h4>
+                <p class="text-emerald-200">Monday - Saturday: 8:00 AM - 6:00 PM<br>Sunday: By Appointment</p>
+            </div>
+        </div>
+        <div class="text-center text-emerald-400 text-sm mt-12">
+            © 2026 WildUganda Tours • All Rights Reserved
+        </div>
+    </footer>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+
+        function showCartModal() {
+            const container = document.getElementById('cart-items');
+            container.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = `<p class="text-center py-20 text-stone-500 text-lg">Your cart is empty.<br>Add some tours from our Bookings page.</p>`;
+            } else {
+                cart.forEach((item, index) => {
+                    const qty = item.quantity || 1;
+                    const subtotal = item.price * qty;
+                    total += subtotal;
+
+                    container.innerHTML += `
+                        <div class="flex justify-between items-center mb-8 pb-6 border-b last:border-0">
+                            <div class="flex-1">
+                                <h4 class="font-semibold">${item.name}</h4>
+                                <p class="text-emerald-700 text-sm">$${item.price} × ${qty}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-lg">$${subtotal}</p>
+                                <button onclick="removeFromCart(${index})" class="text-red-500 text-sm hover:underline mt-2">Remove</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById('cart-total').textContent = `$${total}`;
+            document.getElementById('cart-modal').classList.remove('hidden');
+        }
+
+        function hideCartModal() {
+            document.getElementById('cart-modal').classList.add('hidden');
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showCartModal();
+        }
+
+        function proceedToPayment() {
+            if (cart.length === 0) return;
+            alert("🎉 Thank you for your booking!\n\nWe will contact you shortly to confirm your safari.\n\nAccepted Payments:\n• MTN Mobile Money\n• Airtel Money\n• Visa / Mastercard\n• Bank Transfer");
+            
+            // Clear cart after payment
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            hideCartModal();
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert("✅ Thank you! Your message has been received.\nWe will reply within 24 hours.");
+            e.target.reset();
+        }
+
+        // Initialize cart count
+        updateCartCount();
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - WildUganda Tours</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .heading { font-family: 'Playfair Display', serif; }
+        .modal { animation: modalPop 0.4s ease; }
+        @keyframes modalPop { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+    </style>
+</head>
+<body class="bg-stone-50">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-14 h-14 bg-emerald-800 rounded-3xl flex items-center justify-center text-4xl">🦒</div>
+                <div class="text-3xl font-bold heading tracking-tight">
+                    <span class="text-emerald-800">Wild</span><span class="text-amber-600">Uganda</span>
+                </div>
+            </div>
+            <div class="flex gap-10 text-lg font-medium">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="bookings.html" class="nav-link">Bookings</a>
+                <a href="about.html" class="nav-link text-emerald-800">About Us</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <button onclick="showCartModal()" class="relative text-3xl hover:text-emerald-700 transition">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-count" class="absolute -top-2 -right-2 bg-rose-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-6 py-24">
+        <h1 class="heading text-6xl font-bold text-center mb-10">About WildUganda Tours</h1>
+        <p class="text-xl text-center max-w-3xl mx-auto leading-relaxed text-stone-700">
+            Founded in 2015, we are a locally owned Ugandan safari company committed to responsible tourism, wildlife conservation, 
+            and providing life-changing experiences in the Pearl of Africa.
+        </p>
+        <!-- More content can be added here -->
+    </div>
+
+    <!-- Cart Modal (same as bookings) -->
+    <div id="cart-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
+        <!-- Same modal code as in bookings.html -->
+        <div class="modal bg-white rounded-3xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-hidden">
+            <div class="p-8 border-b flex justify-between items-center">
+                <h2 class="text-3xl font-bold">Your Safari Cart</h2>
+                <button onclick="hideCartModal()" class="text-4xl text-stone-400 hover:text-stone-600">×</button>
+            </div>
+            <div id="cart-items" class="p-8 max-h-[55vh] overflow-auto"></div>
+            <div class="p-8 border-t">
+                <div class="flex justify-between text-2xl font-bold mb-8">
+                    <span>Total</span>
+                    <span id="cart-total">$0</span>
+                </div>
+                <button onclick="proceedToPayment()" class="w-full bg-emerald-800 hover:bg-emerald-900 text-white py-6 rounded-3xl text-lg font-semibold mb-4">Proceed to Payment</button>
+                <button onclick="hideCartModal()" class="w-full border border-stone-300 py-6 rounded-3xl">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-emerald-950 text-white py-16">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p>📞 +256 700 123 456 &nbsp; | &nbsp; ✉️ info@wilduganda.ug</p>
+            <p class="mt-4 text-emerald-400">© 2026 WildUganda Tours • Kampala, Uganda</p>
+        </div>
+    </footer>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+
+        // Reuse the same cart functions
+        function showCartModal() { /* Copy the showCartModal function from bookings.html */ 
+            alert("Cart functionality is shared. Add items from Bookings page.");
+        }
+        function hideCartModal() { document.getElementById('cart-modal').classList.add('hidden'); }
+        function proceedToPayment() { /* same as above */ alert("Proceeding to payment..."); cart = []; localStorage.setItem('cart', JSON.stringify(cart)); updateCartCount(); hideCartModal(); }
+
+        updateCartCount();
+    </script>
+</body>
+</html>
