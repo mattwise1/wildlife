@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WildUganda Tours | Home</title>
+    <title>WildUganda Tours | Pearl of Africa</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -11,10 +11,6 @@
         body { font-family: 'Inter', sans-serif; }
         .heading { font-family: 'Playfair Display', serif; }
         .hero-slide { transition: opacity 1.8s ease-in-out; }
-        .nav-link:after { content: ''; position: absolute; width: 0; height: 3px; bottom: -4px; left: 0; background: #166534; transition: width 0.4s; }
-        .nav-link:hover:after { width: 100%; }
-        .modal { animation: modalPop 0.4s ease; }
-        @keyframes modalPop { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body class="bg-stone-50">
@@ -29,10 +25,10 @@
                 </div>
             </div>
             <div class="flex gap-10 text-lg font-medium">
-                <a href="index.html" class="nav-link text-emerald-800">Home</a>
-                <a href="bookings.html" class="nav-link">Bookings</a>
-                <a href="about.html" class="nav-link">About Us</a>
-                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="index.html" class="text-emerald-800">Home</a>
+                <a href="bookings.html">Bookings</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
             </div>
             <button onclick="showCartModal()" class="relative text-3xl hover:text-emerald-700 transition">
                 <i class="fa-solid fa-cart-shopping"></i>
@@ -41,25 +37,25 @@
         </div>
     </nav>
 
-    <!-- Hero Slideshow + Content (same as before) -->
+    <!-- Hero Slideshow -->
     <div class="relative h-screen overflow-hidden">
         <div id="slides">
-            <div class="hero-slide absolute inset-0 bg-cover bg-center" style="background-image: url('https://picsum.photos/id/1015/2000/1200')"></div>
-            <div class="hero-slide absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('https://picsum.photos/id/133/2000/1200')"></div>
-            <div class="hero-slide absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('https://picsum.photos/id/201/2000/1200')"></div>
+            <div class="hero-slide absolute inset-0 bg-cover bg-center" style="background-image: url('vic.jpg')"></div>
+            <div class="hero-slide absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('war.jpg')"></div>
+            <div class="hero-slide absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('zeb.webp')"></div>
         </div>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70"></div>
         <div class="absolute inset-0 flex items-center justify-center text-center px-6">
             <div class="max-w-5xl">
-                <h1 class="heading text-6xl md:text-7xl text-white font-bold leading-tight mb-6">Discover the True <span class="text-amber-300">Pearl of Africa</span></h1>
-                <a href="bookings.html" class="inline-block bg-white text-emerald-900 px-14 py-6 rounded-3xl text-xl font-semibold hover:bg-amber-300">Plan Your Safari</a>
+                <h1 class="heading text-6xl md:text-7xl text-white font-bold leading-tight">Discover the Pearl of Africa</h1>
+                <p class="text-white text-2xl mt-6">Unforgettable Wildlife Safaris in Uganda</p>
             </div>
         </div>
     </div>
 
-    <!-- Popular Tours -->
+    <!-- Signature Experiences -->
     <section class="max-w-7xl mx-auto px-6 py-20">
-        <h2 class="heading text-5xl font-bold text-center mb-16">Popular Tours</h2>
+        <h2 class="heading text-5xl font-bold text-center mb-16">Signature Experiences</h2>
         <div class="grid md:grid-cols-3 gap-8" id="home-tours"></div>
     </section>
 
@@ -67,35 +63,51 @@
     <div id="cart-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
         <div class="modal bg-white rounded-3xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-hidden">
             <div class="p-8 border-b flex justify-between items-center">
-                <h2 class="text-3xl font-bold">Your Cart</h2>
+                <h2 class="text-3xl font-bold">Your Safari Cart</h2>
                 <button onclick="hideCartModal()" class="text-4xl text-stone-400 hover:text-stone-600">×</button>
             </div>
-            <div id="cart-items" class="p-8 max-h-[60vh] overflow-auto"></div>
+            <div id="cart-items" class="p-8 max-h-[55vh] overflow-auto"></div>
             <div class="p-8 border-t">
-                <div class="flex justify-between text-xl font-semibold mb-6">
+                <div class="flex justify-between text-2xl font-bold mb-8">
                     <span>Total</span>
                     <span id="cart-total">$0</span>
                 </div>
-                <div class="space-y-4">
-                    <button onclick="proceedToPayment()" class="w-full bg-emerald-800 hover:bg-emerald-900 text-white py-5 rounded-2xl text-lg font-semibold">Proceed to Payment</button>
-                    <button onclick="hideCartModal()" class="w-full border border-stone-300 py-5 rounded-2xl">Continue Shopping</button>
-                </div>
+                <button onclick="proceedToPayment()" class="w-full bg-emerald-800 hover:bg-emerald-900 text-white py-6 rounded-3xl text-lg font-semibold">Proceed to Payment</button>
             </div>
         </div>
     </div>
 
+    <!-- Beautiful Footer -->
     <footer class="bg-emerald-950 text-white py-16">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
             <div>
                 <div class="flex items-center gap-3 mb-6">
-                    <div class="w-12 h-12 bg-white rounded-3xl flex items-center justify-center text-4xl">🦒</div>
+                    <div class="w-12 h-12 bg-white rounded-3xl flex items-center justify-center text-emerald-800 text-4xl">🦒</div>
                     <span class="text-3xl font-bold heading">WildUganda</span>
                 </div>
+                <p class="text-emerald-200">Proudly Ugandan • Passionately Wild</p>
             </div>
             <div>
+                <h4 class="font-semibold text-lg mb-6">Quick Links</h4>
+                <a href="bookings.html" class="block hover:text-amber-300 py-1">Our Tours</a>
+                <a href="about.html" class="block hover:text-amber-300 py-1">About Us</a>
+            </div>
+            <div>
+                <h4 class="font-semibold text-lg mb-6">Contact Us</h4>
                 <a href="tel:+256700123456" class="block hover:text-amber-300 py-1">📞 +256 700 123 456</a>
                 <a href="mailto:info@wilduganda.ug" class="block hover:text-amber-300 py-1">✉️ info@wilduganda.ug</a>
             </div>
+            <div>
+                <h4 class="font-semibold text-lg mb-6">Follow Us</h4>
+                <div class="flex gap-6 text-3xl">
+                    <i class="fa-brands fa-instagram hover:text-amber-400 cursor-pointer"></i>
+                    <i class="fa-brands fa-facebook hover:text-amber-400 cursor-pointer"></i>
+                    <i class="fa-brands fa-youtube hover:text-amber-400 cursor-pointer"></i>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-emerald-400 text-sm mt-12">
+            © 2026 WildUganda Tours • Kampala, Uganda • All Rights Reserved
         </div>
     </footer>
 
@@ -103,22 +115,16 @@
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
         function updateCartCount() {
-            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
             document.getElementById('cart-count').textContent = count;
         }
 
         function addToCart(tour) {
-            const existing = cart.find(item => item.name === tour.name);
-            if (existing) existing.quantity += 1;
-            else cart.push({ ...tour, quantity: 1 });
-            
+            const existing = cart.find(i => i.name === tour.name);
+            if (existing) existing.quantity++;
+            else cart.push({...tour, quantity: 1});
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount();
-            
-            const btn = event.currentTarget;
-            const original = btn.innerHTML;
-            btn.innerHTML = "✓ Added";
-            setTimeout(() => btn.innerHTML = original, 1500);
         }
 
         function showCartModal() {
@@ -127,31 +133,29 @@
             let total = 0;
 
             if (cart.length === 0) {
-                container.innerHTML = `<p class="text-center text-stone-500 py-12">Your cart is empty</p>`;
+                container.innerHTML = `<p class="text-center py-20 text-stone-500">Your cart is empty.</p>`;
             } else {
                 cart.forEach((item, index) => {
-                    const subtotal = item.price * item.quantity;
+                    const qty = item.quantity || 1;
+                    const subtotal = item.price * qty;
                     total += subtotal;
                     container.innerHTML += `
-                        <div class="flex gap-6 mb-8">
-                            <div class="flex-1">
+                        <div class="flex justify-between items-center mb-8 border-b pb-6">
+                            <div>
                                 <h4 class="font-semibold">${item.name}</h4>
-                                <p class="text-emerald-700">$${item.price} × ${item.quantity}</p>
+                                <p class="text-sm text-emerald-700">$${item.price} × ${qty}</p>
                             </div>
                             <div class="text-right">
                                 <p class="font-bold">$${subtotal}</p>
-                                <button onclick="removeFromCart(${index})" class="text-red-500 text-sm mt-2">Remove</button>
+                                <button onclick="removeFromCart(${index})" class="text-red-500 text-sm mt-2 hover:underline">Remove</button>
                             </div>
                         </div>
                     `;
                 });
             }
+
             document.getElementById('cart-total').textContent = `$${total}`;
             document.getElementById('cart-modal').classList.remove('hidden');
-        }
-
-        function hideCartModal() {
-            document.getElementById('cart-modal').classList.add('hidden');
         }
 
         function removeFromCart(index) {
@@ -161,35 +165,37 @@
             showCartModal();
         }
 
+
+        function hideCartModal() { document.getElementById('cart-modal').classList.add('hidden'); }
         function proceedToPayment() {
-            if (cart.length === 0) return;
-            alert("🎉 Thank you! Redirecting to secure payment page...\n\nPayment Options:\n• MTN MoMo / Airtel Money\n• Visa / Mastercard\n• Bank Transfer");
+            alert("🎉 Thank you! Proceeding to payment...");
             cart = [];
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount();
             hideCartModal();
         }
 
-        // Sample tours for home
-        const sampleTours = [
-            {name: "Bwindi Gorilla Trek", price: 1299},
-            {name: "Queen Elizabeth Safari", price: 899},
-            {name: "Murchison Falls", price: 1899}
+        // Home Tours with real images
+        const tours = [
+            {name: "Bwindi Gorilla Trek", price: 1299, img: "gorilla-trekking-uganda-safari-3.jpg"},
+            {name: "Murchison Falls Safari", price: 1899, img: "Murchison.jpg"},
+            {name: "Queen Elizabeth Safari", price: 899, img: "queen.jfif"}
         ];
 
-        const homeContainer = document.getElementById('home-tours');
-        sampleTours.forEach(tour => {
+        const container = document.getElementById('home-tours');
+        tours.forEach(t => {
             const div = document.createElement('div');
-            div.className = "bg-white rounded-3xl shadow-xl overflow-hidden";
+            div.className = "bg-white rounded-3xl overflow-hidden shadow-xl";
             div.innerHTML = `
-                <div class="h-64 bg-emerald-700 flex items-center justify-center text-7xl">🦍</div>
+                <img src="${t.img}" class="w-full h-64 object-cover">
                 <div class="p-8">
-                    <h3 class="text-2xl font-bold">${tour.name}</h3>
-                    <p class="text-emerald-700 font-semibold my-3">From $${tour.price}</p>
-                    <button onclick="addToCart(${JSON.stringify(tour)})" class="w-full bg-emerald-800 text-white py-4 rounded-2xl">Add to Cart</button>
+                    <h3 class="text-2xl font-bold">${t.name}</h3>
+                    <p class="text-emerald-700 font-semibold my-3">From $${t.price}</p>
+                    <button onclick='addToCart(${JSON.stringify(t)})' class="w-full bg-emerald-800 hover:bg-emerald-900 text-white py-4 rounded-2xl font-semibold">Add to Cart</button>
                 </div>
+
             `;
-            homeContainer.appendChild(div);
+            container.appendChild(div);
         });
 
         updateCartCount();
