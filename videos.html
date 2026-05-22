@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife Videos - WildUganda Tours</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .heading { font-family: 'Playfair Display', serif; }
+
+        .video-card { transition: transform 0.35s ease, box-shadow 0.35s ease; cursor: pointer; }
+        .video-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.18); }
+        .video-card:hover .play-btn { transform: scale(1.15); background: rgba(180,83,9,0.95); }
+
+        .thumb-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 1rem 1rem 0 0; }
+        .thumb-wrap img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        .play-btn {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: rgba(6,78,59,0.88); color: white;
+            width: 64px; height: 64px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; transition: transform 0.25s ease, background 0.25s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Video lightbox modal */
+        #video-modal { display: none; }
+        #video-modal.open { display: flex; }
+        .video-frame-wrap { position: relative; padding-bottom: 56.25%; height: 0; width: 100%; }
+        .video-frame-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 0 0 1rem 1rem; }
+
+        .tag { display: inline-block; background: #d97706; color: white; font-size: 0.75rem; font-weight: 600; padding: 2px 10px; border-radius: 999px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .hero-bg { background: linear-gradient(135deg, #064e3b 0%, #065f46 40%, #b45309 100%); }
+
+        /* Cart modal */
+        .modal-anim { animation: modalPop 0.4s ease; }
+        @keyframes modalPop { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+    </style>
+</head>
+<body class="bg-stone-50">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-14 h-14 bg-emerald-800 rounded-3xl flex items-center justify-center text-4xl">🦒</div>
+                <div class="text-3xl font-bold heading tracking-tight">
+                    <span class="text-emerald-800">Wild</span><span class="text-amber-600">Uganda</span>
+                </div>
+            </div>
+            <div class="flex gap-10 text-lg font-medium">
+                <a href="index.html" class="hover:text-emerald-700 transition">Home</a>
+                <a href="bookings.html" class="hover:text-emerald-700 transition">Bookings</a>
+                <a href="videos.html" class="text-emerald-800 font-semibold">Videos</a>
+                <a href="about.html" class="hover:text-emerald-700 transition">About Us</a>
+                <a href="contact.html" class="hover:text-emerald-700 transition">Contact</a>
+            </div>
+            <button onclick="showCartModal()" class="relative text-3xl hover:text-emerald-700 transition">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-count" class="absolute -top-2 -right-2 bg-rose-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <div class="hero-bg py-20 px-6 text-center text-white">
+        <h1 class="heading text-6xl font-bold mb-4">🎬 Uganda in Motion</h1>
+        <p class="text-xl text-emerald-100 max-w-2xl mx-auto">Watch the untamed beauty of Uganda's wildlife, landscapes, and safari adventures come alive. Click any video to play.</p>
+    </div>
+
+    <!-- Videos Grid -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+
+        <h2 class="heading text-4xl font-bold mb-10 text-emerald-900">🌊 Parks & Landscapes</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+
+            <div class="video-card bg-white rounded-2xl overflow-hidden shadow-lg" onclick="openVideo('CdrJzZJGNgQ', 'The Mighty Murchison Falls')">
+                <div class="thumb-wrap">
+                    <img src="https://img.youtube.com/vi/CdrJzZJGNgQ/hqdefault.jpg" alt="Murchison Falls">
+                    <div class="play-btn"><i class="fa-solid fa-play ml-1"></i></div>
+                </div>
+                <div class="p-6">
+                    <span class="tag">Murchison Falls</span>
+                    <h3 class="text-xl font-bold text-stone-800">The Mighty Murchison Falls</h3>
+                    <p class="text-stone-500 text-sm mt-2">Witness the world's most powerful waterfall as the Nile squeezes through a 7-metre gorge.</p>
+                </div>
+            </div>
+
+            <div class="video-card bg-white rounded-2xl overflow-hidden shadow-lg" onclick="openVideo('PmlsyIm7oCA', 'Queen Elizabeth National Park')">
+                <div class="thumb-wrap">
+                    <img src="https://img.youtube.com/vi/PmlsyIm7oCA/hqdefault.jpg" alt="Queen Elizabeth National Park">
+                    <div class="play-btn"><i class="fa-solid fa-play ml-1"></i></div>
+                </div>
+                <div class="p-6">
+                    <span class="tag">Queen Elizabeth</span>
+                    <h3 class="text-xl font-bold text-stone-800">Queen Elizabeth National Park</h3>
+                    <p class="text-stone-500 text-sm mt-2">Savanna, wetlands, and the famous tree-climbing lions of the Ishasha sector.</p>
+                </div>
+            </div>
+
+            <div class="video-card bg-white rounded-2xl overflow-hidden shadow-lg" onclick="openVideo('bKtxyA70G94', 'Uganda Safari Highlights')">
+                <div class="thumb-wrap">
+                    <img src="https://img.youtube.com/vi/bKtxyA70G94/hqdefault.jpg" alt="Uganda Safari Highlights">
+                    <div class="play-btn"><i class="fa-solid fa-play ml-1"></i></div>
+                </div>
+                <div class="p-6">
+                    <span class="tag">Safari</span>
+                    <h3 class="text-xl font-bold text-stone-800">Uganda Safari Highlights</h3>
+                    <p class="text-stone-500 text-sm mt-2">Lions, elephants, hippos and more in their natural habitat across Uganda's national parks.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <h2 class="heading text-4xl font-bold mb-10 text-emerald-900">🦍 Wildlife Encounters</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+
+            <div class="video-card bg-white rounded-2xl overflow-hidden shadow-lg" onclick="openVideo('z8dGz2ILnxE', 'Bwindi Chimpanzee Trekking')">
+                <div class="thumb-wrap">
+                    <img src="https://img.youtube.com/vi/z8dGz2ILnxE/hqdefault.jpg" alt="Bwindi Chimpanzee Trekking">
+                    <div class="play-btn"><i class="fa-solid fa-play ml-1"></i></div>
+                </div>
+                <div class="p-6">
+                    <span class="tag">Bwindi</span>
+                    <h3 class="text-xl font-bold text-stone-800">Bwindi Chimpanzee Trekking</h3>
+                    <p class="text-stone-500 text-sm mt-2">Trek into Bwindi Impenetrable Forest to encounter both gorillas and chimpanzees up close.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-emerald-900 rounded-3xl p-12 text-center text-white mt-4">
+            <h2 class="heading text-4xl font-bold mb-4">Ready to Live It?</h2>
+            <p class="text-emerald-200 text-lg mb-8">These videos are just a preview. Book your adventure and experience Uganda for real.</p>
+            <a href="bookings.html" class="inline-block bg-amber-500 hover:bg-amber-400 text-white font-bold py-5 px-12 rounded-2xl text-lg transition">Browse Our Safari Packages →</a>
+        </div>
+
+    </section>
+
+    <!-- Video Lightbox Modal -->
+    <div id="video-modal" class="fixed inset-0 bg-black/85 items-center justify-center z-[200] p-4">
+        <div class="modal-anim bg-white rounded-2xl w-full max-w-3xl mx-auto overflow-hidden shadow-2xl">
+            <div class="flex justify-between items-center px-6 py-4 border-b">
+                <h3 id="video-title" class="font-bold text-xl text-stone-800"></h3>
+                <button onclick="closeVideo()" class="text-4xl text-stone-400 hover:text-stone-700 leading-none">×</button>
+            </div>
+            <div class="video-frame-wrap">
+                <iframe id="video-iframe" src="" title="Video Player" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
+        <div class="modal-anim bg-white rounded-3xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-hidden">
+            <div class="p-8 border-b flex justify-between items-center">
+                <h2 class="text-3xl font-bold">Your Safari Cart</h2>
+                <button onclick="hideCartModal()" class="text-4xl text-stone-400 hover:text-stone-600">×</button>
+            </div>
+            <div id="cart-items" class="p-8 max-h-[55vh] overflow-auto"></div>
+            <div class="p-8 border-t">
+                <div class="flex justify-between text-2xl font-bold mb-8">
+                    <span>Total</span><span id="cart-total">$0</span>
+                </div>
+                <button onclick="proceedToPayment()" class="w-full bg-emerald-800 hover:bg-emerald-900 text-white py-6 rounded-3xl text-lg font-semibold mb-4">Proceed to Payment</button>
+                <button onclick="hideCartModal()" class="w-full border border-stone-300 py-6 rounded-3xl">Continue Browsing</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-emerald-950 text-white py-16">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 bg-white rounded-3xl flex items-center justify-center text-emerald-800 text-4xl">🦒</div>
+                    <span class="text-3xl font-bold heading">WildUganda</span>
+                </div>
+                <p class="text-emerald-200">Proudly Ugandan • Passionately Wild</p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-lg mb-6">Quick Links</h4>
+                <a href="bookings.html" class="block hover:text-amber-300 py-1">Our Tours</a>
+                <a href="videos.html" class="block hover:text-amber-300 py-1">Videos</a>
+                <a href="about.html" class="block hover:text-amber-300 py-1">About Us</a>
+            </div>
+            <div>
+                <h4 class="font-semibold text-lg mb-6">Contact Us</h4>
+                <a href="tel:+256700123456" class="block hover:text-amber-300 py-1">📞 +256 700 123 456</a>
+                <a href="mailto:info@wilduganda.ug" class="block hover:text-amber-300 py-1">✉️ info@wilduganda.ug</a>
+            </div>
+            <div>
+                <h4 class="font-semibold text-lg mb-6">Follow Us</h4>
+                <div class="flex gap-6 text-3xl">
+                    <i class="fa-brands fa-instagram hover:text-amber-400 cursor-pointer"></i>
+                    <i class="fa-brands fa-facebook hover:text-amber-400 cursor-pointer"></i>
+                    <i class="fa-brands fa-youtube hover:text-amber-400 cursor-pointer"></i>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-emerald-400 text-sm mt-12">
+            © 2026 WildUganda Tours • Kampala, Uganda • All Rights Reserved
+        </div>
+    </footer>
+
+    <script>
+        // ── Video Lightbox ──────────────────────────────────────────
+        function openVideo(videoId, title) {
+            document.getElementById('video-title').textContent = title;
+            document.getElementById('video-iframe').src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+            const modal = document.getElementById('video-modal');
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideo() {
+            document.getElementById('video-iframe').src = ''; // stops playback
+            document.getElementById('video-modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // Close on backdrop click
+        document.getElementById('video-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeVideo();
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideo(); });
+
+        // ── Cart ────────────────────────────────────────────────────
+        let cart = JSON.parse(localStorage.getItem('wilduganda_cart')) || [];
+
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+
+        function showCartModal() {
+            const container = document.getElementById('cart-items');
+            container.innerHTML = '';
+            let total = 0;
+            if (cart.length === 0) {
+                container.innerHTML = `<p class="text-center py-20 text-stone-500">Your cart is empty.</p>`;
+            } else {
+                cart.forEach((item, index) => {
+                    const qty = item.quantity || 1;
+                    const subtotal = item.price * qty;
+                    total += subtotal;
+                    container.innerHTML += `
+                        <div class="flex justify-between items-center mb-8 border-b pb-6">
+                            <div>
+                                <h4 class="font-semibold">${item.name}</h4>
+                                <p class="text-sm text-emerald-700">$${item.price} × ${qty}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold">$${subtotal}</p>
+                                <button onclick="removeFromCart(${index})" class="text-red-500 text-sm mt-2 hover:underline">Remove</button>
+                            </div>
+                        </div>`;
+                });
+            }
+            document.getElementById('cart-total').textContent = `$${total}`;
+            document.getElementById('cart-modal').classList.remove('hidden');
+        }
+
+        function hideCartModal() { document.getElementById('cart-modal').classList.add('hidden'); }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('wilduganda_cart', JSON.stringify(cart));
+            updateCartCount();
+            showCartModal();
+        }
+
+        function proceedToPayment() {
+            if (cart.length === 0) return;
+            alert("🎉 Thank you! Proceeding to secure checkout.\n\nPayment Options: MTN MoMo, Airtel Money, Visa, Bank Transfer");
+            cart = [];
+            localStorage.setItem('wilduganda_cart', JSON.stringify(cart));
+            updateCartCount();
+            hideCartModal();
+        }
+
+        updateCartCount();
+    </script>
+</body>
+</html>
