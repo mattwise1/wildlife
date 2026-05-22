@@ -11,6 +11,21 @@
         body { font-family: 'Inter', sans-serif; }
         .heading { font-family: 'Playfair Display', serif; }
         .hero-slide { transition: opacity 1.8s ease-in-out; }
+        .modal-anim { animation: modalPop 0.35s ease; }
+        @keyframes modalPop { from { opacity: 0; transform: scale(0.88); } to { opacity: 1; transform: scale(1); } }
+        .tour-card { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+        .tour-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.15); }
+        .stat-card { transition: transform 0.3s ease; }
+        .stat-card:hover { transform: translateY(-4px); }
+        #cart-count { transition: transform 0.2s ease; }
+        .btn-added { background: #065f46 !important; }
+        .toast-show { animation: slideUp 0.3s ease forwards; }
+        @keyframes slideUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+        .why-item:hover .why-icon { transform: scale(1.15); }
+        .why-icon { transition: transform 0.3s ease; }
+        .park-card { transition: all 0.4s ease; overflow: hidden; }
+        .park-card:hover img { transform: scale(1.06); }
+        .park-card img { transition: transform 0.5s ease; }
     </style>
 </head>
 <body class="bg-stone-50">
@@ -25,10 +40,11 @@
                 </div>
             </div>
             <div class="flex gap-10 text-lg font-medium">
-                <a href="index.html" class="text-emerald-800">Home</a>
-                <a href="bookings.html">Bookings</a>
-                <a href="about.html">About Us</a>
-                <a href="contact.html">Contact</a>
+                <a href="index.html" class="text-emerald-800 font-semibold">Home</a>
+                <a href="bookings.html" class="hover:text-emerald-700 transition">Bookings</a>
+                <a href="videos.html" class="hover:text-emerald-700 transition">Videos</a>
+                <a href="about.html" class="hover:text-emerald-700 transition">About Us</a>
+                <a href="contact.html" class="hover:text-emerald-700 transition">Contact</a>
             </div>
             <button onclick="showCartModal()" class="relative text-3xl hover:text-emerald-700 transition">
                 <i class="fa-solid fa-cart-shopping"></i>
@@ -47,21 +63,226 @@
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70"></div>
         <div class="absolute inset-0 flex items-center justify-center text-center px-6">
             <div class="max-w-5xl">
-                <h1 class="heading text-6xl md:text-7xl text-white font-bold leading-tight">Discover the Pearl of Africa</h1>
-                <p class="text-white text-2xl mt-6">Unforgettable Wildlife Safaris in Uganda</p>
+                <p class="text-amber-400 font-semibold text-xl tracking-widest uppercase mb-4">Welcome to Uganda</p>
+                <h1 class="heading text-6xl md:text-7xl text-white font-bold leading-tight">Discover the Pearl<br>of Africa</h1>
+                <p class="text-white text-xl mt-6 max-w-2xl mx-auto opacity-90">Encounter mountain gorillas, witness Murchison Falls, and explore landscapes that will stay with you forever.</p>
+                <div class="flex gap-4 justify-center mt-10">
+                    <a href="bookings.html" class="bg-amber-500 hover:bg-amber-400 text-white font-bold py-4 px-10 rounded-2xl text-lg transition">View Packages</a>
+                    <a href="videos.html" class="bg-white/20 hover:bg-white/30 text-white font-semibold py-4 px-10 rounded-2xl text-lg backdrop-blur-sm transition">Watch Videos</a>
+                </div>
+            </div>
+        </div>
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white opacity-60 text-sm flex flex-col items-center gap-2">
+            <span>Scroll to explore</span>
+            <i class="fa-solid fa-chevron-down animate-bounce"></i>
+        </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="bg-emerald-900 text-white py-10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="stat-card">
+                <div class="text-4xl font-bold text-amber-400">1,063+</div>
+                <div class="text-emerald-200 mt-1">Mountain Gorillas</div>
+            </div>
+            <div class="stat-card">
+                <div class="text-4xl font-bold text-amber-400">10+</div>
+                <div class="text-emerald-200 mt-1">National Parks</div>
+            </div>
+            <div class="stat-card">
+                <div class="text-4xl font-bold text-amber-400">1,000+</div>
+                <div class="text-emerald-200 mt-1">Bird Species</div>
+            </div>
+            <div class="stat-card">
+                <div class="text-4xl font-bold text-amber-400">5,000+</div>
+                <div class="text-emerald-200 mt-1">Happy Travellers</div>
             </div>
         </div>
     </div>
 
-    <!-- Signature Experiences -->
+    <!-- About Uganda -->
     <section class="max-w-7xl mx-auto px-6 py-20">
-        <h2 class="heading text-5xl font-bold text-center mb-16">Signature Experiences</h2>
-        <div class="grid md:grid-cols-3 gap-8" id="home-tours"></div>
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <p class="text-amber-600 font-semibold uppercase tracking-widest mb-3">About Uganda</p>
+                <h2 class="heading text-5xl font-bold text-stone-900 leading-tight mb-6">Why Uganda is Africa's Best-Kept Secret</h2>
+                <p class="text-stone-600 text-lg leading-relaxed mb-5">
+                    Nestled in the heart of East Africa, Uganda is home to half the world's remaining mountain gorillas, the mighty River Nile, and some of the continent's most diverse ecosystems — all within a country the size of the UK.
+                </p>
+                <p class="text-stone-600 text-lg leading-relaxed mb-8">
+                    With 10 national parks, over 1,000 bird species, and warm hospitable people, Uganda offers an authentic, uncrowded safari experience that leaves visitors transformed.
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-100">
+                        <div class="text-3xl mb-2">🌿</div>
+                        <h4 class="font-semibold text-stone-800">Bwindi Forest</h4>
+                        <p class="text-stone-500 text-sm mt-1">UNESCO World Heritage Site and gorilla sanctuary</p>
+                    </div>
+                    <div class="bg-amber-50 rounded-2xl p-5 border border-amber-100">
+                        <div class="text-3xl mb-2">🌊</div>
+                        <h4 class="font-semibold text-stone-800">River Nile Source</h4>
+                        <p class="text-stone-500 text-sm mt-1">The world's longest river begins at Jinja, Uganda</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="park-card rounded-2xl overflow-hidden shadow-lg col-span-2">
+                    <img src="Murchison.jpg" class="w-full h-52 object-cover">
+                    <div class="bg-emerald-800 text-white px-5 py-3 text-sm font-semibold">Murchison Falls — The Nile at its most dramatic</div>
+                </div>
+                <div class="park-card rounded-2xl overflow-hidden shadow-lg">
+                    <img src="gorilla-trekking-uganda-safari-3.jpg" class="w-full h-40 object-cover">
+                </div>
+                <div class="park-card rounded-2xl overflow-hidden shadow-lg">
+                    <img src="kibale.jpg" class="w-full h-40 object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signature Experiences -->
+    <section class="bg-stone-100 py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="text-amber-600 font-semibold uppercase tracking-widest text-center mb-2">Top Tours</p>
+            <h2 class="heading text-5xl font-bold text-center mb-4">Signature Experiences</h2>
+            <p class="text-center text-stone-500 text-lg mb-14 max-w-xl mx-auto">Handcrafted journeys designed to show you the very best of Uganda</p>
+            <div class="grid md:grid-cols-3 gap-8" id="home-tours"></div>
+            <div class="text-center mt-12">
+                <a href="bookings.html" class="inline-block bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-5 px-12 rounded-2xl text-lg transition">See All Packages →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <p class="text-amber-600 font-semibold uppercase tracking-widest text-center mb-2">Why Book With Us</p>
+        <h2 class="heading text-5xl font-bold text-center mb-14">The WildUganda Difference</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="why-item text-center p-8 bg-white rounded-3xl shadow-md">
+                <div class="why-icon w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-5">🦍</div>
+                <h3 class="text-xl font-bold mb-3">Gorilla Permit Experts</h3>
+                <p class="text-stone-500 leading-relaxed">We secure your gorilla permits in advance so your trek is guaranteed. No permit, no pay — simple as that.</p>
+            </div>
+            <div class="why-item text-center p-8 bg-white rounded-3xl shadow-md">
+                <div class="why-icon w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-5">🧭</div>
+                <h3 class="text-xl font-bold mb-3">Expert Local Guides</h3>
+                <p class="text-stone-500 leading-relaxed">All our guides are Ugandan-born, certified naturalists with deep knowledge of wildlife behaviour and local culture.</p>
+            </div>
+            <div class="why-item text-center p-8 bg-white rounded-3xl shadow-md">
+                <div class="why-icon w-16 h-16 bg-rose-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-5">🌍</div>
+                <h3 class="text-xl font-bold mb-3">Eco-Responsible Tourism</h3>
+                <p class="text-stone-500 leading-relaxed">15% of every booking goes directly to conservation projects and local community schools in park buffer zones.</p>
+            </div>
+            <div class="why-item text-center p-8 bg-white rounded-3xl shadow-md">
+                <div class="why-icon w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-5">✈️</div>
+                <h3 class="text-xl font-bold mb-3">Airport Transfers Included</h3>
+                <p class="text-stone-500 leading-relaxed">Every package includes pick-up and drop-off at Entebbe International Airport — stress-free from the moment you land.</p>
+            </div>
+            <div class="why-item text-center p-8 bg-white rounded-3xl shadow-md">
+                <div class="why-icon w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-5">🏕️</div>
+                <h3 class="text-xl font-bold mb-3">Handpicked Lodges</h3>
+                <p class="text-stone-500 leading-relaxed">From luxury forest lodges to authentic tented camps, every property is personally vetted by our team for quality and location.</p>
+            </div>
+            <div class="why-item text-center p-8 bg-white rounded-3xl shadow-md">
+                <div class="why-icon w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-5">📞</div>
+                <h3 class="text-xl font-bold mb-3">24/7 In-Country Support</h3>
+                <p class="text-stone-500 leading-relaxed">Our operations team is reachable around the clock throughout your trip. You're never alone in the wild.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Time to Visit -->
+    <section class="bg-emerald-900 text-white py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="text-amber-400 font-semibold uppercase tracking-widest text-center mb-2">Plan Your Trip</p>
+            <h2 class="heading text-5xl font-bold text-center mb-14">Best Time to Visit Uganda</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+                    <div class="flex items-center gap-4 mb-5">
+                        <div class="text-4xl">☀️</div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Dry Season</h3>
+                            <p class="text-emerald-300">June – September & December – February</p>
+                        </div>
+                    </div>
+                    <p class="text-emerald-100 leading-relaxed mb-4">The best time for gorilla trekking and game drives. Trails are dry, animals gather around water sources, and visibility is excellent.</p>
+                    <ul class="space-y-2 text-emerald-200 text-sm">
+                        <li class="flex gap-2"><span class="text-amber-400">✓</span> Easier gorilla trekking trails</li>
+                        <li class="flex gap-2"><span class="text-amber-400">✓</span> Peak wildlife viewing at waterholes</li>
+                        <li class="flex gap-2"><span class="text-amber-400">✓</span> Ideal for photography</li>
+                    </ul>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+                    <div class="flex items-center gap-4 mb-5">
+                        <div class="text-4xl">🌧️</div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Green Season</h3>
+                            <p class="text-emerald-300">March – May & October – November</p>
+                        </div>
+                    </div>
+                    <p class="text-emerald-100 leading-relaxed mb-4">Lush landscapes, fewer tourists, and lower prices. Bird watching is at its peak as migratory species arrive. Gorillas can still be trekked.</p>
+                    <ul class="space-y-2 text-emerald-200 text-sm">
+                        <li class="flex gap-2"><span class="text-amber-400">✓</span> Lower prices — up to 30% off</li>
+                        <li class="flex gap-2"><span class="text-amber-400">✓</span> Best for bird watching</li>
+                        <li class="flex gap-2"><span class="text-amber-400">✓</span> Fewer crowds at parks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <p class="text-amber-600 font-semibold uppercase tracking-widest text-center mb-2">Testimonials</p>
+        <h2 class="heading text-5xl font-bold text-center mb-14">What Our Guests Say</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-3xl p-8 shadow-md">
+                <div class="flex text-amber-400 mb-4 text-lg">★★★★★</div>
+                <p class="text-stone-600 leading-relaxed mb-6">"Standing metres from a mountain gorilla family was the single greatest moment of my life. The guide knew every individual by name — absolutely magical."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 bg-emerald-100 rounded-full flex items-center justify-center font-bold text-emerald-800">SM</div>
+                    <div>
+                        <div class="font-semibold text-stone-800">Sarah M.</div>
+                        <div class="text-stone-400 text-sm">🇬🇧 London, UK • Gorilla Trek</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-3xl p-8 shadow-md">
+                <div class="flex text-amber-400 mb-4 text-lg">★★★★★</div>
+                <p class="text-stone-600 leading-relaxed mb-6">"The Murchison Falls boat cruise was breathtaking — hippos everywhere, massive Nile crocs, and then those falls roaring above us. WildUganda made everything seamless."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 bg-amber-100 rounded-full flex items-center justify-center font-bold text-amber-800">JR</div>
+                    <div>
+                        <div class="font-semibold text-stone-800">James R.</div>
+                        <div class="text-stone-400 text-sm">🇺🇸 New York, USA • Murchison Safari</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-3xl p-8 shadow-md">
+                <div class="flex text-amber-400 mb-4 text-lg">★★★★★</div>
+                <p class="text-stone-600 leading-relaxed mb-6">"We did the Grand Safari package — 10 days of pure wonder. The team handled everything perfectly. Uganda is so underrated. We're already planning our return trip!"</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 bg-rose-100 rounded-full flex items-center justify-center font-bold text-rose-800">AL</div>
+                    <div>
+                        <div class="font-semibold text-stone-800">Amara L.</div>
+                        <div class="text-stone-400 text-sm">🇩🇪 Berlin, Germany • Grand Safari</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="bg-gradient-to-r from-amber-600 to-amber-500 py-16 px-6 text-center text-white">
+        <h2 class="heading text-5xl font-bold mb-4">Your Safari Starts Here</h2>
+        <p class="text-amber-100 text-xl mb-8 max-w-xl mx-auto">Join thousands of travellers who've discovered Uganda with us. Limited spaces available each season.</p>
+        <a href="bookings.html" class="inline-block bg-white text-amber-700 font-bold py-5 px-14 rounded-2xl text-lg hover:bg-amber-50 transition shadow-lg">Browse All Packages</a>
     </section>
 
     <!-- Cart Modal -->
     <div id="cart-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
-        <div class="modal bg-white rounded-3xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-hidden">
+        <div class="modal-anim bg-white rounded-3xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-hidden">
             <div class="p-8 border-b flex justify-between items-center">
                 <h2 class="text-3xl font-bold">Your Safari Cart</h2>
                 <button onclick="hideCartModal()" class="text-4xl text-stone-400 hover:text-stone-600">×</button>
@@ -72,12 +293,18 @@
                     <span>Total</span>
                     <span id="cart-total">$0</span>
                 </div>
-                <button onclick="proceedToPayment()" class="w-full bg-emerald-800 hover:bg-emerald-900 text-white py-6 rounded-3xl text-lg font-semibold">Proceed to Payment</button>
+                <button onclick="proceedToPayment()" class="w-full bg-emerald-800 hover:bg-emerald-900 text-white py-6 rounded-3xl text-lg font-semibold mb-4">Proceed to Payment</button>
+                <button onclick="hideCartModal()" class="w-full border border-stone-300 py-4 rounded-3xl text-stone-600 hover:bg-stone-50">Continue Shopping</button>
             </div>
         </div>
     </div>
 
-    <!-- Beautiful Footer -->
+    <!-- Toast -->
+    <div id="toast" class="hidden fixed bottom-6 right-6 bg-emerald-800 text-white px-6 py-4 rounded-2xl shadow-2xl z-[200] flex items-center gap-3 text-lg font-medium">
+        <span>✅</span><span id="toast-msg">Added to cart!</span>
+    </div>
+
+    <!-- Footer -->
     <footer class="bg-emerald-950 text-white py-16">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
             <div>
@@ -85,17 +312,20 @@
                     <div class="w-12 h-12 bg-white rounded-3xl flex items-center justify-center text-emerald-800 text-4xl">🦒</div>
                     <span class="text-3xl font-bold heading">WildUganda</span>
                 </div>
-                <p class="text-emerald-200">Proudly Ugandan • Passionately Wild</p>
+                <p class="text-emerald-200 leading-relaxed">Proudly Ugandan • Passionately Wild<br>Responsible Tourism Since 2015</p>
             </div>
             <div>
                 <h4 class="font-semibold text-lg mb-6">Quick Links</h4>
                 <a href="bookings.html" class="block hover:text-amber-300 py-1">Our Tours</a>
+                <a href="videos.html" class="block hover:text-amber-300 py-1">Videos</a>
                 <a href="about.html" class="block hover:text-amber-300 py-1">About Us</a>
+                <a href="contact.html" class="block hover:text-amber-300 py-1">Contact</a>
             </div>
             <div>
                 <h4 class="font-semibold text-lg mb-6">Contact Us</h4>
                 <a href="tel:+256700123456" class="block hover:text-amber-300 py-1">📞 +256 700 123 456</a>
                 <a href="mailto:info@wilduganda.ug" class="block hover:text-amber-300 py-1">✉️ info@wilduganda.ug</a>
+                <p class="text-emerald-400 text-sm mt-3">Kampala, Uganda</p>
             </div>
             <div>
                 <h4 class="font-semibold text-lg mb-6">Follow Us</h4>
@@ -104,6 +334,7 @@
                     <i class="fa-brands fa-facebook hover:text-amber-400 cursor-pointer"></i>
                     <i class="fa-brands fa-youtube hover:text-amber-400 cursor-pointer"></i>
                 </div>
+                <p class="text-emerald-400 text-sm mt-6">@WildUgandaTours</p>
             </div>
         </div>
         <div class="text-center text-emerald-400 text-sm mt-12">
@@ -112,26 +343,46 @@
     </footer>
 
     <script>
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cart = JSON.parse(localStorage.getItem('wilduganda_cart')) || [];
 
         function updateCartCount() {
+            const el = document.getElementById('cart-count');
             const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-            document.getElementById('cart-count').textContent = count;
+            el.textContent = count;
+            el.style.transform = 'scale(1.5)';
+            setTimeout(() => el.style.transform = 'scale(1)', 250);
         }
 
-        function addToCart(tour) {
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('toast-show');
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => toast.classList.add('hidden'), 2600);
+        }
+
+        function addToCart(tour, btnEl) {
             const existing = cart.find(i => i.name === tour.name);
             if (existing) existing.quantity++;
             else cart.push({...tour, quantity: 1});
-            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('wilduganda_cart', JSON.stringify(cart));
             updateCartCount();
+            showToast(`"${tour.name}" added to cart!`);
+
+            // Button feedback
+            const orig = btnEl.innerHTML;
+            btnEl.innerHTML = '✓ Added!';
+            btnEl.classList.add('btn-added');
+            setTimeout(() => { btnEl.innerHTML = orig; btnEl.classList.remove('btn-added'); }, 1500);
+
+            if (!document.getElementById('cart-modal').classList.contains('hidden')) renderCartItems();
         }
 
-        function showCartModal() {
+        function renderCartItems() {
             const container = document.getElementById('cart-items');
             container.innerHTML = '';
             let total = 0;
-
             if (cart.length === 0) {
                 container.innerHTML = `<p class="text-center py-20 text-stone-500">Your cart is empty.</p>`;
             } else {
@@ -140,63 +391,83 @@
                     const subtotal = item.price * qty;
                     total += subtotal;
                     container.innerHTML += `
-                        <div class="flex justify-between items-center mb-8 border-b pb-6">
+                        <div class="flex justify-between items-center mb-6 border-b pb-6">
                             <div>
-                                <h4 class="font-semibold">${item.name}</h4>
-                                <p class="text-sm text-emerald-700">$${item.price} × ${qty}</p>
+                                <h4 class="font-semibold text-stone-800">${item.name}</h4>
+                                <div class="flex items-center gap-3 mt-2">
+                                    <button onclick="changeQty(${index}, -1)" class="w-7 h-7 rounded-full border border-stone-300 hover:bg-stone-100 font-bold text-lg leading-none">−</button>
+                                    <span class="font-semibold text-emerald-700">${qty}</span>
+                                    <button onclick="changeQty(${index}, 1)" class="w-7 h-7 rounded-full border border-stone-300 hover:bg-stone-100 font-bold text-lg leading-none">+</button>
+                                </div>
                             </div>
                             <div class="text-right">
-                                <p class="font-bold">$${subtotal}</p>
+                                <p class="font-bold text-lg">$${subtotal.toLocaleString()}</p>
+                                <p class="text-xs text-stone-400">$${item.price} each</p>
                                 <button onclick="removeFromCart(${index})" class="text-red-500 text-sm mt-2 hover:underline">Remove</button>
                             </div>
-                        </div>
-                    `;
+                        </div>`;
                 });
             }
+            document.getElementById('cart-total').textContent = `$${total.toLocaleString()}`;
+        }
 
-            document.getElementById('cart-total').textContent = `$${total}`;
-            document.getElementById('cart-modal').classList.remove('hidden');
+        function showCartModal() { renderCartItems(); document.getElementById('cart-modal').classList.remove('hidden'); }
+        function hideCartModal() { document.getElementById('cart-modal').classList.add('hidden'); }
+
+        function changeQty(index, delta) {
+            cart[index].quantity = (cart[index].quantity || 1) + delta;
+            if (cart[index].quantity <= 0) cart.splice(index, 1);
+            localStorage.setItem('wilduganda_cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCartItems();
         }
 
         function removeFromCart(index) {
             cart.splice(index, 1);
-            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('wilduganda_cart', JSON.stringify(cart));
             updateCartCount();
-            showCartModal();
+            renderCartItems();
         }
 
-
-        function hideCartModal() { document.getElementById('cart-modal').classList.add('hidden'); }
         function proceedToPayment() {
+            if (cart.length === 0) return;
             alert("🎉 Thank you! Proceeding to payment...");
             cart = [];
-            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('wilduganda_cart', JSON.stringify(cart));
             updateCartCount();
             hideCartModal();
         }
 
-        // Home Tours with real images
+        // Featured tours on homepage
         const tours = [
-            {name: "Bwindi Gorilla Trek", price: 1299, img: "gorilla-trekking-uganda-safari-3.jpg"},
-            {name: "Murchison Falls Safari", price: 1899, img: "Murchison.jpg"},
-            {name: "Queen Elizabeth Safari", price: 899, img: "queen.jfif"}
+            {name: "Bwindi Gorilla Trek", price: 1299, duration: "4 Days", img: "gorilla-trekking-uganda-safari-3.jpg", desc: "Meet endangered mountain gorillas face-to-face in their ancient forest home."},
+            {name: "Murchison Falls Safari", price: 1899, duration: "5 Days", img: "Murchison.jpg", desc: "Cruise the Nile, spot the Big Five, and witness Africa's most powerful waterfall."},
+            {name: "Queen Elizabeth Safari", price: 899, duration: "3 Days", img: "queen.jfif", desc: "Tree-climbing lions, Kazinga Channel boat cruises, and stunning crater lakes."}
         ];
 
         const container = document.getElementById('home-tours');
         tours.forEach(t => {
             const div = document.createElement('div');
-            div.className = "bg-white rounded-3xl overflow-hidden shadow-xl";
+            div.className = "tour-card bg-white rounded-3xl overflow-hidden shadow-lg";
             div.innerHTML = `
-                <img src="${t.img}" class="w-full h-64 object-cover">
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold">${t.name}</h3>
-                    <p class="text-emerald-700 font-semibold my-3">From $${t.price}</p>
-                    <button onclick='addToCart(${JSON.stringify(t)})' class="w-full bg-emerald-800 hover:bg-emerald-900 text-white py-4 rounded-2xl font-semibold">Add to Cart</button>
-                </div>
-
-            `;
+                <img src="${t.img}" class="w-full h-56 object-cover">
+                <div class="p-7">
+                    <h3 class="text-2xl font-bold text-stone-800">${t.name}</h3>
+                    <p class="text-stone-500 text-sm mt-2 mb-4">${t.desc}</p>
+                    <p class="text-emerald-700 font-semibold">📅 ${t.duration} &nbsp;·&nbsp; From $${t.price.toLocaleString()}</p>
+                    <button onclick='addToCart(${JSON.stringify(t)}, this)' class="mt-5 w-full bg-emerald-800 hover:bg-emerald-900 text-white py-4 rounded-2xl font-semibold transition-colors duration-200">🛒 Add to Cart</button>
+                </div>`;
             container.appendChild(div);
         });
+
+        // Hero slideshow
+        const slides = document.querySelectorAll('.hero-slide');
+        let current = 0;
+        setInterval(() => {
+            slides[current].style.opacity = '0';
+            current = (current + 1) % slides.length;
+            slides[current].style.opacity = '1';
+        }, 5000);
 
         updateCartCount();
     </script>
