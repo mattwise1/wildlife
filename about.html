@@ -28,6 +28,7 @@
             <div class="flex gap-10 text-lg font-medium">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="bookings.html" class="nav-link">Bookings</a>
+                <a href="videos.html" class="nav-link">Videos</a>
                 <a href="about.html" class="nav-link text-emerald-800">About Us</a>
                 <a href="contact.html" class="nav-link">Contact</a>
             </div>
@@ -75,7 +76,7 @@
     </footer>
 
     <script>
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cart = JSON.parse(localStorage.getItem('wilduganda_cart')) || [];
         function updateCartCount() {
             const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
             document.getElementById('cart-count').textContent = count;
@@ -86,7 +87,7 @@
             alert("Cart functionality is shared. Add items from Bookings page.");
         }
         function hideCartModal() { document.getElementById('cart-modal').classList.add('hidden'); }
-        function proceedToPayment() { /* same as above */ alert("Proceeding to payment..."); cart = []; localStorage.setItem('cart', JSON.stringify(cart)); updateCartCount(); hideCartModal(); }
+        function proceedToPayment() { /* same as above */ alert("Proceeding to payment..."); cart = []; localStorage.setItem('wilduganda_cart', JSON.stringify(cart)); updateCartCount(); hideCartModal(); }
 
         updateCartCount();
     </script>
