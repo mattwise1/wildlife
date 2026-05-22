@@ -36,6 +36,7 @@
             <div class="flex gap-10 text-lg font-medium">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="bookings.html" class="nav-link">Bookings</a>
+                <a href="videos.html" class="nav-link">Videos</a>
                 <a href="about.html" class="nav-link">About Us</a>
                 <a href="contact.html" class="nav-link text-emerald-800">Contact</a>
             </div>
@@ -133,7 +134,7 @@
     </footer>
 
     <script>
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cart = JSON.parse(localStorage.getItem('wilduganda_cart')) || [];
 
         function updateCartCount() {
             const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
@@ -178,7 +179,7 @@
 
         function removeFromCart(index) {
             cart.splice(index, 1);
-            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('wilduganda_cart', JSON.stringify(cart));
             updateCartCount();
             showCartModal();
         }
@@ -189,7 +190,7 @@
             
             // Clear cart after payment
             cart = [];
-            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('wilduganda_cart', JSON.stringify(cart));
             updateCartCount();
             hideCartModal();
         }
